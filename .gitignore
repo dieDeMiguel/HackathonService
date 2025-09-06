@@ -1,0 +1,97 @@
+# --- Python bytecode & caches ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Distribution / packaging ---
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+pip-wheel-metadata/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- PyInstaller ---
+*.manifest
+*.spec
+
+# --- Logs & runtime ---
+*.log
+logs/
+uvicorn.log
+*.pid
+*.tmp
+*.temp
+
+# --- Unit test / coverage ---
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# --- Type checkers / linters ---
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+.pyright/
+
+# --- Environments ---
+.env
+.env.*
+.venv
+.venv*/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+__pypackages__/   # PEP 582
+.pdm-python
+.pep582/
+
+# --- Databases / local state ---
+*.sqlite
+*.sqlite3
+*.db
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- OS / Editor junk ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.history/
+
+# --- Optional: Docker overrides (uncomment if you keep local-only files) ---
+# docker-compose.override.yml
+# .docker/
+
+# --- O
