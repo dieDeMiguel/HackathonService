@@ -135,6 +135,8 @@ def save_embeddings_to_db(embeddings: list, chunks: list | None = None):
                 "section_type": chunk.get("section_type", "content"),
                 "char_count": chunk.get("char_count", 0),
                 "subsections": chunk.get("subsections", []),
+                "source_file": chunk.get("source_file", "unknown"),
+                "file_type": chunk.get("file_type", "content"),
                 "chunk_index": i
             }
         else:
