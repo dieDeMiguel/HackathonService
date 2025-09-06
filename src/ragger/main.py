@@ -1,25 +1,30 @@
 from pathlib import Path
-from ragger.embed import save_embeddings_to_db, get_lines_from_file, embed_sentences
+from ragger.embed import save_embeddings_to_db, get_content_from_file, embed_sentences, hybrid_chunking
 
 
 CURRENT_DIR = Path(".").resolve()
 
 
 def main():
-    print("Reading data")
+    print("🔄 Reading and processing data with hybrid chunking...")
     filepath = CURRENT_DIR / "src" / "ragger" / "test_data.md"
-    lines = get_lines_from_file(filepath)
     
-    # Filtrar líneas vacías y limpiar
-    clean_lines = [line.strip() for line in lines if line.strip()]
+    # Leer contenido completo del archivo
+    content = get_content_from_file(filepath)
     
-    print(f"Processing {len(clean_lines)} lines")
-    embs = embed_sentences(clean_lines)
+    # Aplicar chunking híbrido
+    chunks = hybrid_chunking(content)
     
-    # Crear payloads con el texto
-    payloads = [{"text": line.strip()} for line in clean_lines]
+    print(f"📊 Created {len(chunks)} semantic chunks")
     
-    save_embeddings_to_db(embs, payloads)
+    # Extraer textos para embeddings
+    chunk_texts = [chunk["text"] for chunk in chunks]
+    
+    print("🤖 Generating OpenAI embeddings...")
+    embs = embed_sentences(chunk_texts)
+    
+    print("💾 Saving to Qdrant with enriched metadata...")
+    save_embeddings_to_db(embs, chunks)
 
 
 if __name__ == "__main__":

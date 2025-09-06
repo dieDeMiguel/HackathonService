@@ -28,6 +28,70 @@ def get_lines_from_file(filepath):
         return file.readlines()
 
 
+def hybrid_chunking(content):
+    """
+    Chunking híbrido que mantiene contexto de secciones completas
+    Ideal para chatbots y LLMs
+    """
+    chunks = []
+    current_section = ""
+    current_title = ""
+    current_subsections = []
+    
+    for line in content.split('\n'):
+        line = line.strip()
+        if not line:
+            continue
+            
+        if line.startswith('#'):
+            # Guardar chunk anterior si existe
+            if current_section.strip():
+                chunk_text = f"{current_title}\n\n{current_section.strip()}"
+                chunks.append({
+                    "text": chunk_text,
+                    "title": current_title.strip('#').strip(),
+                    "section_type": "content",
+                    "char_count": len(chunk_text),
+                    "subsections": current_subsections.copy()
+                })
+            
+            # Determinar nivel de header
+            header_level = len(line) - len(line.lstrip('#'))
+            
+            # Si es un header principal (## o menos #), iniciar nueva sección
+            if header_level <= 2:
+                current_title = line
+                current_section = ""
+                current_subsections = []
+            else:
+                # Si es subsección (###), agregar a subsecciones
+                current_subsections.append(line.strip('#').strip())
+                current_section += line + "\n"
+        else:
+            current_section += line + "\n"
+    
+    # Guardar último chunk
+    if current_section.strip():
+        chunk_text = f"{current_title}\n\n{current_section.strip()}"
+        chunks.append({
+            "text": chunk_text,
+            "title": current_title.strip('#').strip(),
+            "section_type": "content", 
+            "char_count": len(chunk_text),
+            "subsections": current_subsections.copy()
+        })
+    
+    return chunks
+
+
+def get_content_from_file(filepath):
+    """
+    Lee el archivo completo como string para chunking híbrido
+    """
+    with open(filepath, 'r', encoding='utf-8') as file:
+        return file.read()
+
+
 def embed_sentences(sentences):
     """
     Generate embeddings using OpenAI text-embedding-3-small model
@@ -52,25 +116,43 @@ def embed_sentences(sentences):
     return embeddings
 
 
-def save_embeddings_to_db(embeddings: list, payloads: list | None = None):
+def save_embeddings_to_db(embeddings: list, chunks: list | None = None):
     """
-    Uploads embeddings into Qdrant.
+    Uploads embeddings into Qdrant with enriched metadata.
 
     Args:
-        collection_name (str): Name of the Qdrant collection.
         embeddings (list): List of embeddings (each a list/array of floats).
-        payloads (list, optional): List of payload dictionaries aligned with embeddings.
-                                   Useful for storing metadata like text, ids, etc.
+        chunks (list, optional): List of chunk dictionaries with metadata.
     """
     points = []
     for i, vector in enumerate(embeddings):
+        # Crear payload enriquecido
+        if chunks and i < len(chunks):
+            chunk = chunks[i]
+            payload = {
+                "text": chunk["text"],
+                "title": chunk.get("title", ""),
+                "section_type": chunk.get("section_type", "content"),
+                "char_count": chunk.get("char_count", 0),
+                "subsections": chunk.get("subsections", []),
+                "chunk_index": i
+            }
+        else:
+            payload = {"text": f"Chunk {i}", "chunk_index": i}
+        
         points.append(
             PointStruct(
                 id=str(uuid.uuid4()),  # generate unique id
                 vector=vector,
-                payload=payloads[i] if payloads and i < len(payloads) else {},
+                payload=payload,
             )
         )
 
     client.upsert(collection_name=COLLECTION_NAME, points=points)
     print(f"✅ Uploaded {len(points)} embeddings to collection '{COLLECTION_NAME}'")
+    
+    # Mostrar estadísticas de chunks
+    if chunks:
+        avg_chars = sum(chunk.get("char_count", 0) for chunk in chunks) / len(chunks)
+        print(f"📊 Average chunk size: {avg_chars:.0f} characters")
+        print(f"📋 Sections processed: {len(set(chunk.get('title', '') for chunk in chunks))}")
