@@ -1,23 +1,24 @@
-import fastapi
-from app.services import service
+from pathlib import Path
+from ragger.embed import save_embeddings_to_db, get_lines_from_file, embed_sentences
 
 
-from app.services.preprocessor import preprocessor
-from app.data import test_data
-from app.services.preprocessor import embed
+# def search():
+#     for sentence in test_data.dta.split("\n"):
+#         embedded_vectors = embed_sentences(sentence)
+#         preprocessor.upload_embeddings(
+#             "HACKATHON_COLLECTION", [embedded_vector], [{"text": sentence}]
+#         )
+
+CURRENT_DIR = Path(".").resolve()
 
 
-app = fastapi.FastAPI()
+def main():
+    print("Reading data")
+    filepath = CURRENT_DIR / "src" / "ragger" / "test_data.md"
+    lines = get_lines_from_file(filepath)
+    embs = embed_sentences(lines)
+    save_embeddings_to_db(embs)
 
 
-@app.get("/")
-def read_root():
-    service.search()
-
-
-def search():
-    for sentence in test_data.dta.split("\n"):
-        embedded_vector = embed.embed_sentences(sentence)
-        preprocessor.upload_embeddings(
-            "HACKATHON_COLLECTION", [embedded_vector], [{"text": sentence}]
-        )
+if __name__ == "__main__":
+    main()
