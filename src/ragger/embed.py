@@ -1,12 +1,16 @@
-from sentence_transformers import SentenceTransformer
+import os
+from openai import OpenAI
 import qdrant_client
 from qdrant_client.models import PointStruct
 import uuid
 from qdrant_client import QdrantClient
+from dotenv import load_dotenv
 
+# Cargar variables de entorno
+load_dotenv()
 
-model = SentenceTransformer("all-MiniLM-L6-v2")
-
+# Configurar OpenAI
+openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 COLLECTION_NAME = "HACKATHON_COLLECTION"
 
@@ -14,7 +18,7 @@ client = QdrantClient(url="http://localhost:6333/")
 client.recreate_collection(
     collection_name=COLLECTION_NAME,
     vectors_config=qdrant_client.models.VectorParams(
-        size=384, distance=qdrant_client.models.Distance.COSINE
+        size=1536, distance=qdrant_client.models.Distance.COSINE  # OpenAI text-embedding-3-small
     ),
 )
 
@@ -25,7 +29,27 @@ def get_lines_from_file(filepath):
 
 
 def embed_sentences(sentences):
-    return model.encode(sentences)
+    """
+    Generate embeddings using OpenAI text-embedding-3-small model
+    """
+    # Convertir a lista si es una sola cadena
+    if isinstance(sentences, str):
+        sentences = [sentences]
+    
+    # Llamar a OpenAI API
+    response = openai_client.embeddings.create(
+        model="text-embedding-3-small",
+        input=sentences
+    )
+    
+    # Extraer embeddings
+    embeddings = [data.embedding for data in response.data]
+    
+    # Si solo había una oración, devolver un solo embedding
+    if len(embeddings) == 1 and len(sentences) == 1:
+        return embeddings[0]
+    
+    return embeddings
 
 
 def save_embeddings_to_db(embeddings: list, payloads: list | None = None):

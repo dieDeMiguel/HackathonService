@@ -3,8 +3,13 @@ from pydantic import BaseModel
 from typing import List, Optional
 import qdrant_client
 from qdrant_client import QdrantClient
-from sentence_transformers import SentenceTransformer
 import logging
+import os
+from openai import OpenAI
+from dotenv import load_dotenv
+
+# Cargar variables de entorno
+load_dotenv()
 
 # Configurar logging
 logging.basicConfig(level=logging.INFO)
@@ -16,9 +21,9 @@ app = FastAPI(title="RAG Search API", version="1.0.0")
 COLLECTION_NAME = "HACKATHON_COLLECTION"
 QDRANT_URL = "http://localhost:6333"
 
-# Inicializar cliente y modelo
+# Inicializar clientes
 client = QdrantClient(url=QDRANT_URL)
-model = SentenceTransformer("all-MiniLM-L6-v2")
+openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 class SearchRequest(BaseModel):
     query: str
@@ -60,8 +65,12 @@ def search_documents(request: SearchRequest):
     try:
         logger.info(f"Searching for: {request.query}")
         
-        # Generar embedding para la consulta
-        query_vector = model.encode([request.query])[0].tolist()
+        # Generar embedding para la consulta usando OpenAI
+        response = openai_client.embeddings.create(
+            model="text-embedding-3-small",
+            input=[request.query]
+        )
+        query_vector = response.data[0].embedding
         
         # Buscar en Qdrant
         search_result = client.search(
