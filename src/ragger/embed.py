@@ -84,7 +84,18 @@ def hybrid_chunking(content):
                             if group_section.strip():
                                 # Extraer el nombre del grupo (A, B, C, etc.)
                                 group_lines = group_section.strip().split('\n')
-                                group_name = group_lines[0].split('(')[0].strip() if '(' in group_lines[0] else group_lines[0].split(':')[0].strip()
+                                first_line = group_lines[0].strip()
+                                
+                                # Extraer solo la letra del grupo
+                                if '(' in first_line:
+                                    group_name = first_line.split('(')[0].strip()
+                                elif ':' in first_line:
+                                    group_name = first_line.split(':')[0].strip()
+                                else:
+                                    group_name = first_line.strip()
+                                
+                                # Limpiar para obtener solo la letra (A, B, C, etc.)
+                                group_name = group_name.replace('GROUP', '').strip()
                                 
                                 group_chunk = f"{base_header}\n\n**GROUP {group_section.strip()}"
                                 chunks.append({
@@ -188,7 +199,18 @@ def hybrid_chunking(content):
                     if group_section.strip():
                         # Extraer el nombre del grupo (A, B, C, etc.)
                         group_lines = group_section.strip().split('\n')
-                        group_name = group_lines[0].split('(')[0].strip() if '(' in group_lines[0] else group_lines[0].split(':')[0].strip()
+                        first_line = group_lines[0].strip()
+                        
+                        # Extraer solo la letra del grupo
+                        if '(' in first_line:
+                            group_name = first_line.split('(')[0].strip()
+                        elif ':' in first_line:
+                            group_name = first_line.split(':')[0].strip()
+                        else:
+                            group_name = first_line.strip()
+                        
+                        # Limpiar para obtener solo la letra (A, B, C, etc.)
+                        group_name = group_name.replace('GROUP', '').strip()
                         
                         group_chunk = f"{base_header}\n\n**GROUP {group_section.strip()}"
                         chunks.append({
