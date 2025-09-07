@@ -122,6 +122,78 @@ def get_collection_info():
         logger.error(f"Failed to get collection info: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to get collection info: {str(e)}")
 
+@app.post("/populate")
+def populate_collection():
+    """Populate the Qdrant collection with embeddings from the data files"""
+    try:
+        from pathlib import Path
+        from ragger.embed import save_embeddings_to_db, get_content_from_file, embed_sentences, hybrid_chunking
+        
+        logger.info("Starting to populate Qdrant collection...")
+        
+        # Create collection if it doesn't exist
+        try:
+            client.get_collection(COLLECTION_NAME)
+            logger.info(f"Collection {COLLECTION_NAME} already exists")
+        except Exception:
+            logger.info(f"Creating collection {COLLECTION_NAME}")
+            import qdrant_client
+            client.recreate_collection(
+                collection_name=COLLECTION_NAME,
+                vectors_config=qdrant_client.models.VectorParams(
+                    size=1536, distance=qdrant_client.models.Distance.COSINE
+                ),
+            )
+        
+        # Process data files
+        current_dir = Path("/app")  # Railway container path
+        data_files = [
+            current_dir / "src" / "ragger" / "test_data.md",
+            current_dir / "src" / "ragger" / "system_prompt_data.md"
+        ]
+        
+        all_chunks = []
+        
+        for filepath in data_files:
+            if filepath.exists():
+                logger.info(f"Processing: {filepath.name}")
+                content = get_content_from_file(filepath)
+                file_chunks = hybrid_chunking(content)
+                
+                for chunk in file_chunks:
+                    chunk["source_file"] = filepath.name
+                    chunk["file_type"] = "ticket_sales" if "test_data" in filepath.name else "system_knowledge"
+                
+                all_chunks.extend(file_chunks)
+                logger.info(f"Created {len(file_chunks)} chunks from {filepath.name}")
+            else:
+                logger.warning(f"File not found: {filepath}")
+        
+        if not all_chunks:
+            raise HTTPException(status_code=404, detail="No data files found to process")
+        
+        logger.info(f"Total chunks created: {len(all_chunks)}")
+        
+        # Generate embeddings
+        chunk_texts = [chunk["text"] for chunk in all_chunks]
+        logger.info("Generating OpenAI embeddings...")
+        embs = embed_sentences(chunk_texts)
+        
+        # Save to Qdrant
+        logger.info("Saving to Qdrant...")
+        save_embeddings_to_db(embs, all_chunks)
+        
+        return {
+            "status": "success",
+            "message": f"Successfully populated collection with {len(all_chunks)} chunks",
+            "chunks_processed": len(all_chunks),
+            "files_processed": [f.name for f in data_files if f.exists()]
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to populate collection: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to populate collection: {str(e)}")
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
