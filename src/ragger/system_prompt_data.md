@@ -110,6 +110,92 @@ Due to FIFA sponsorship rules, venues will use alternative names during the tour
 - Estadio Akron → Estadio Guadalajara
 - BMO Field → Toronto Stadium
 
+## Quick Group Reference Guide
+
+### Group A (Mexico Host Group)
+**All 6 matches:**
+- June 11: Mexico vs A2 in Mexico City / A3 vs A4 in Guadalajara
+- June 18: Mexico vs A4 in Guadalajara / A2 vs A3 in Miami  
+- June 24: Mexico vs A3 in Mexico City / A2 vs A4 in Monterrey
+**Cities:** Mexico City, Guadalajara, Miami, Monterrey
+
+### Group B (Canada Host Group)  
+**All 6 matches:**
+- June 12: Canada vs B2 in Toronto / B3 vs B4 in Vancouver
+- June 18: Canada vs B3 in Vancouver / B2 vs B4 in Los Angeles
+- June 24: Canada vs B4 in Vancouver / B2 vs B3 in Seattle
+**Cities:** Toronto, Vancouver, Los Angeles, Seattle
+
+### Group C
+**All 6 matches:**
+- June 13: C1 vs C2 in Boston / C3 vs C4 in New York
+- June 19: C1 vs C3 in Boston / C2 vs C4 in Philadelphia
+- June 24: C1 vs C4 in Atlanta / C2 vs C3 in Miami
+**Cities:** Boston, New York, Philadelphia, Atlanta, Miami
+
+### Group D (USA Host Group)
+**All 6 matches:**
+- June 12: USA vs D2 in Los Angeles / D3 vs D4 in Vancouver
+- June 19: USA vs D3 in Seattle / D2 vs D4 in San Francisco
+- June 25: USA vs D4 in Los Angeles / D2 vs D3 in San Francisco
+**Cities:** Los Angeles, Vancouver, Seattle, San Francisco
+
+### Group E
+**All 6 matches:**
+- June 14: E1 vs E2 in Philadelphia / E3 vs E4 in Houston
+- June 20: E1 vs E3 in Kansas City / E2 vs E4 in Toronto
+- June 25: E1 vs E4 in Philadelphia / E2 vs E3 in New York
+**Cities:** Philadelphia, Houston, Kansas City, Toronto, New York
+
+### Group F
+**All 6 matches:**
+- June 14: F1 vs F2 in Dallas / F3 vs F4 in Monterrey
+- June 20: F1 vs F3 in Houston / F2 vs F4 in Monterrey
+- June 25: F1 vs F4 in Dallas / F2 vs F3 in Kansas City
+**Cities:** Dallas, Monterrey, Houston, Kansas City
+
+### Group G
+**All 6 matches:**
+- June 15: G1 vs G2 in Seattle / G3 vs G4 in Los Angeles
+- June 21: G1 vs G3 in Vancouver / G2 vs G4 in Los Angeles
+- June 26: G1 vs G4 in Vancouver / G2 vs G3 in Seattle
+**Cities:** Seattle, Los Angeles, Vancouver
+
+### Group H
+**All 6 matches:**
+- June 15: H1 vs H2 in Atlanta / H3 vs H4 in Miami
+- June 21: H1 vs H3 in Atlanta / H2 vs H4 in Miami
+- June 26: H1 vs H4 in Guadalajara / H2 vs H3 in Houston
+**Cities:** Atlanta, Miami, Guadalajara, Houston
+
+### Group I
+**All 6 matches:**
+- June 16: I1 vs I2 in Boston / I3 vs I4 in New York
+- June 22: I1 vs I3 in Philadelphia / I2 vs I4 in New York
+- June 26: I1 vs I4 in Toronto / I2 vs I3 in Boston
+**Cities:** Boston, New York, Philadelphia, Toronto
+
+### Group J
+**All 6 matches:**
+- June 16: J1 vs J2 in San Francisco / J3 vs J4 in Kansas City
+- June 22: J1 vs J3 in San Francisco / J2 vs J4 in Dallas
+- June 27: J1 vs J4 in Kansas City / J2 vs J3 in Dallas
+**Cities:** San Francisco, Kansas City, Dallas
+
+### Group K
+**All 6 matches:**
+- June 17: K1 vs K2 in Mexico City / K3 vs K4 in Houston
+- June 23: K1 vs K3 in Guadalajara / K2 vs K4 in Houston
+- June 27: K1 vs K4 in Atlanta / K2 vs K3 in Miami
+**Cities:** Mexico City, Houston, Guadalajara, Atlanta, Miami
+
+### Group L
+**All 6 matches:**
+- June 17: L1 vs L2 in Dallas / L3 vs L4 in Toronto
+- June 23: L1 vs L3 in Boston / L2 vs L4 in Toronto
+- June 27: L1 vs L4 in Philadelphia / L2 vs L3 in New York
+**Cities:** Dallas, Toronto, Boston, Philadelphia, New York
+
 ## Tournament Format and Structure
 
 ### Basic Tournament Information
@@ -140,68 +226,66 @@ To avoid very long travels, venues are grouped into three zones:
 **HOST GROUPS**
 
 **GROUP A (MEXICO):**
-- June 11: Guadalajara (A vs A) / Mexico City (Mexico vs A2)
-- June 18: Guadalajara (Mexico vs A4) / Miami (A vs A)  
-- June 24: Mexico City (Mexico vs A3) / Monterrey (A vs A)
+- June 11: Mexico vs A2 in Mexico City (Estadio Azteca) / A3 vs A4 in Guadalajara (Estadio Akron)
+- June 18: Mexico vs A4 in Guadalajara (Estadio Akron) / A2 vs A3 in Miami (Hard Rock Stadium)  
+- June 24: Mexico vs A3 in Mexico City (Estadio Azteca) / A2 vs A4 in Monterrey (Estadio BBVA)
 
 **GROUP B (CANADA):**
-- June 12: Toronto (Canada vs B2)
-- June 13: Group B match (without Canada)
-- June 18: Vancouver (Canada vs B3) / Los Angeles (B vs B)
-- June 24: Vancouver (Canada vs B4) / Seattle (B vs B)
+- June 12: Canada vs B2 in Toronto (BMO Field) / B3 vs B4 in Vancouver (BC Place)
+- June 18: Canada vs B3 in Vancouver (BC Place) / B2 vs B4 in Los Angeles (SoFi Stadium)
+- June 24: Canada vs B4 in Vancouver (BC Place) / B2 vs B3 in Seattle (Lumen Field)
 
 **GROUP D (USA):**
-- June 12: Los Angeles (USA vs D2)
-- June 13: Vancouver (D match without USA)
-- June 19: Seattle (USA vs D3) / San Francisco (D vs D)
-- June 25: Los Angeles (USA vs D4) / San Francisco (D vs D)
+- June 12: USA vs D2 in Los Angeles (SoFi Stadium) / D3 vs D4 in Vancouver (BC Place)
+- June 19: USA vs D3 in Seattle (Lumen Field) / D2 vs D4 in San Francisco (Levi's Stadium)
+- June 25: USA vs D4 in Los Angeles (SoFi Stadium) / D2 vs D3 in San Francisco (Levi's Stadium)
 
 **NON-HOST GROUPS**
 
 **GROUP C:**
-- June 13: Boston / New York
-- June 19: Boston / Philadelphia  
-- June 24: Atlanta / Miami
+- June 13: C1 vs C2 in Boston (Gillette Stadium) / C3 vs C4 in New York (MetLife Stadium)
+- June 19: C1 vs C3 in Boston (Gillette Stadium) / C2 vs C4 in Philadelphia (Lincoln Financial Field)
+- June 24: C1 vs C4 in Atlanta (Mercedes-Benz Stadium) / C2 vs C3 in Miami (Hard Rock Stadium)
 
 **GROUP E:**
-- June 14: Philadelphia / Houston
-- June 20: Kansas City / Toronto
-- June 25: Philadelphia / New York
+- June 14: E1 vs E2 in Philadelphia (Lincoln Financial Field) / E3 vs E4 in Houston (NRG Stadium)
+- June 20: E1 vs E3 in Kansas City (Arrowhead Stadium) / E2 vs E4 in Toronto (BMO Field)
+- June 25: E1 vs E4 in Philadelphia (Lincoln Financial Field) / E2 vs E3 in New York (MetLife Stadium)
 
 **GROUP F:**
-- June 14: Dallas / Monterrey
-- June 20: Houston / Monterrey
-- June 25: Dallas / Kansas City
+- June 14: F1 vs F2 in Dallas (AT&T Stadium) / F3 vs F4 in Monterrey (Estadio BBVA)
+- June 20: F1 vs F3 in Houston (NRG Stadium) / F2 vs F4 in Monterrey (Estadio BBVA)
+- June 25: F1 vs F4 in Dallas (AT&T Stadium) / F2 vs F3 in Kansas City (Arrowhead Stadium)
 
 **GROUP G:**
-- June 15: Seattle / Los Angeles
-- June 21: Vancouver / Los Angeles
-- June 26: Vancouver / Seattle
+- June 15: G1 vs G2 in Seattle (Lumen Field) / G3 vs G4 in Los Angeles (SoFi Stadium)
+- June 21: G1 vs G3 in Vancouver (BC Place) / G2 vs G4 in Los Angeles (SoFi Stadium)
+- June 26: G1 vs G4 in Vancouver (BC Place) / G2 vs G3 in Seattle (Lumen Field)
 
 **GROUP H:**
-- June 15: Atlanta / Miami
-- June 21: Atlanta / Miami
-- June 26: Guadalajara / Houston
+- June 15: H1 vs H2 in Atlanta (Mercedes-Benz Stadium) / H3 vs H4 in Miami (Hard Rock Stadium)
+- June 21: H1 vs H3 in Atlanta (Mercedes-Benz Stadium) / H2 vs H4 in Miami (Hard Rock Stadium)
+- June 26: H1 vs H4 in Guadalajara (Estadio Akron) / H2 vs H3 in Houston (NRG Stadium)
 
 **GROUP I:**
-- June 16: Boston / New York
-- June 22: Philadelphia / New York
-- June 26: Toronto / Boston
+- June 16: I1 vs I2 in Boston (Gillette Stadium) / I3 vs I4 in New York (MetLife Stadium)
+- June 22: I1 vs I3 in Philadelphia (Lincoln Financial Field) / I2 vs I4 in New York (MetLife Stadium)
+- June 26: I1 vs I4 in Toronto (BMO Field) / I2 vs I3 in Boston (Gillette Stadium)
 
 **GROUP J:**
-- June 16: San Francisco / Kansas City
-- June 22: San Francisco / Dallas
-- June 27: Kansas City / Dallas
+- June 16: J1 vs J2 in San Francisco (Levi's Stadium) / J3 vs J4 in Kansas City (Arrowhead Stadium)
+- June 22: J1 vs J3 in San Francisco (Levi's Stadium) / J2 vs J4 in Dallas (AT&T Stadium)
+- June 27: J1 vs J4 in Kansas City (Arrowhead Stadium) / J2 vs J3 in Dallas (AT&T Stadium)
 
 **GROUP K:**
-- June 17: Mexico City / Houston
-- June 23: Guadalajara / Houston
-- June 27: Atlanta / Miami
+- June 17: K1 vs K2 in Mexico City (Estadio Azteca) / K3 vs K4 in Houston (NRG Stadium)
+- June 23: K1 vs K3 in Guadalajara (Estadio Akron) / K2 vs K4 in Houston (NRG Stadium)
+- June 27: K1 vs K4 in Atlanta (Mercedes-Benz Stadium) / K2 vs K3 in Miami (Hard Rock Stadium)
 
 **GROUP L:**
-- June 17: Dallas / Toronto
-- June 23: Boston / Toronto
-- June 27: Philadelphia / New York
+- June 17: L1 vs L2 in Dallas (AT&T Stadium) / L3 vs L4 in Toronto (BMO Field)
+- June 23: L1 vs L3 in Boston (Gillette Stadium) / L2 vs L4 in Toronto (BMO Field)
+- June 27: L1 vs L4 in Philadelphia (Lincoln Financial Field) / L2 vs L3 in New York (MetLife Stadium)
 
 ## Host Nation Information
 
