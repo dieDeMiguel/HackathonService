@@ -7,17 +7,15 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
-COPY pyproject.toml uv.lock ./
-
-# Install uv
+# Install uv first
 RUN pip install uv
 
-# Install dependencies
-RUN uv sync --frozen
-
-# Copy source code
+# Copy project files and source code (needed for uv sync to work)
+COPY pyproject.toml uv.lock ./
 COPY src/ ./src/
+
+# Install dependencies (now that source code is available)
+RUN uv sync --frozen
 
 # Expose port
 EXPOSE 8000
