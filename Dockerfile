@@ -17,8 +17,8 @@ COPY src/ ./src/
 # Install dependencies (now that source code is available)
 RUN uv sync --frozen
 
-# Expose port
+# Expose port (optional but useful)
 EXPOSE 8000
 
-# Run the application
-CMD ["uv", "run", "uvicorn", "src.ragger.api:app", "--host", "0.0.0.0", "--port", "8000"]
+# Use shell form to expand ${PORT} variable; fallback to 8000 for local
+CMD sh -c 'uv run uvicorn src.ragger.api:app --host 0.0.0.0 --port ${PORT:-8000}'
