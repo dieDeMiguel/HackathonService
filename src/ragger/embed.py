@@ -51,13 +51,16 @@ def get_lines_from_file(filepath):
 
 def hybrid_chunking(content):
     """
-    Chunking híbrido que mantiene contexto de secciones completas
-    Ideal para chatbots y LLMs
+    Chunking híbrido mejorado que mantiene contexto de secciones completas
+    Especialmente optimizado para información de grupos y fixtures
     """
     chunks = []
     current_section = ""
     current_title = ""
     current_subsections = []
+    
+    # Límite de caracteres por chunk (optimizado para embeddings)
+    MAX_CHUNK_SIZE = 1200
     
     for line in content.split('\n'):
         line = line.strip()
@@ -68,13 +71,72 @@ def hybrid_chunking(content):
             # Guardar chunk anterior si existe
             if current_section.strip():
                 chunk_text = f"{current_title}\n\n{current_section.strip()}"
-                chunks.append({
-                    "text": chunk_text,
-                    "title": current_title.strip('#').strip(),
-                    "section_type": "content",
-                    "char_count": len(chunk_text),
-                    "subsections": current_subsections.copy()
-                })
+                
+                # Si el chunk es muy largo, dividirlo inteligentemente
+                if len(chunk_text) > MAX_CHUNK_SIZE:
+                    # Buscar puntos de división naturales para información de grupos
+                    if "GROUP" in chunk_text and "**GROUP" in chunk_text:
+                        # Dividir por grupos individuales
+                        group_sections = chunk_text.split("**GROUP")
+                        base_header = group_sections[0]
+                        
+                        for i, group_section in enumerate(group_sections[1:], 1):
+                            if group_section.strip():
+                                group_chunk = f"{base_header}\n\n**GROUP{group_section.strip()}"
+                                chunks.append({
+                                    "text": group_chunk,
+                                    "title": f"{current_title.strip('#').strip()} - Group {chr(64+i)}",
+                                    "section_type": "group_fixture",
+                                    "char_count": len(group_chunk),
+                                    "subsections": [f"Group {chr(64+i)} Fixture"],
+                                    "chunk_index": len(chunks)
+                                })
+                    else:
+                        # División por subsecciones para otros tipos de contenido largo
+                        if current_subsections and len(current_subsections) > 1:
+                            subsection_parts = current_section.split('###')
+                            if len(subsection_parts) > 1:
+                                for j, part in enumerate(subsection_parts[1:], 1):
+                                    if part.strip():
+                                        subsection_title = current_subsections[j-1] if j-1 < len(current_subsections) else f"Part {j}"
+                                        subsection_chunk = f"{current_title}\n\n### {subsection_title}\n{part.strip()}"
+                                        chunks.append({
+                                            "text": subsection_chunk,
+                                            "title": current_title.strip('#').strip(),
+                                            "section_type": "content",
+                                            "char_count": len(subsection_chunk),
+                                            "subsections": [subsection_title],
+                                            "chunk_index": len(chunks)
+                                        })
+                            else:
+                                # Si no se puede dividir, mantener como chunk único
+                                chunks.append({
+                                    "text": chunk_text,
+                                    "title": current_title.strip('#').strip(),
+                                    "section_type": "content",
+                                    "char_count": len(chunk_text),
+                                    "subsections": current_subsections.copy(),
+                                    "chunk_index": len(chunks)
+                                })
+                        else:
+                            chunks.append({
+                                "text": chunk_text,
+                                "title": current_title.strip('#').strip(),
+                                "section_type": "content",
+                                "char_count": len(chunk_text),
+                                "subsections": current_subsections.copy(),
+                                "chunk_index": len(chunks)
+                            })
+                else:
+                    # Chunk normal si no es muy largo
+                    chunks.append({
+                        "text": chunk_text,
+                        "title": current_title.strip('#').strip(),
+                        "section_type": "content",
+                        "char_count": len(chunk_text),
+                        "subsections": current_subsections.copy(),
+                        "chunk_index": len(chunks)
+                    })
             
             # Determinar nivel de header
             header_level = len(line) - len(line.lstrip('#'))
@@ -91,16 +153,44 @@ def hybrid_chunking(content):
         else:
             current_section += line + "\n"
     
-    # Guardar último chunk
+    # Guardar último chunk (aplicar la misma lógica)
     if current_section.strip():
         chunk_text = f"{current_title}\n\n{current_section.strip()}"
-        chunks.append({
-            "text": chunk_text,
-            "title": current_title.strip('#').strip(),
-            "section_type": "content", 
-            "char_count": len(chunk_text),
-            "subsections": current_subsections.copy()
-        })
+        
+        if len(chunk_text) > MAX_CHUNK_SIZE:
+            if "GROUP" in chunk_text and "**GROUP" in chunk_text:
+                group_sections = chunk_text.split("**GROUP")
+                base_header = group_sections[0]
+                
+                for i, group_section in enumerate(group_sections[1:], 1):
+                    if group_section.strip():
+                        group_chunk = f"{base_header}\n\n**GROUP{group_section.strip()}"
+                        chunks.append({
+                            "text": group_chunk,
+                            "title": f"{current_title.strip('#').strip()} - Group {chr(64+i)}",
+                            "section_type": "group_fixture",
+                            "char_count": len(group_chunk),
+                            "subsections": [f"Group {chr(64+i)} Fixture"],
+                            "chunk_index": len(chunks)
+                        })
+            else:
+                chunks.append({
+                    "text": chunk_text,
+                    "title": current_title.strip('#').strip(),
+                    "section_type": "content",
+                    "char_count": len(chunk_text),
+                    "subsections": current_subsections.copy(),
+                    "chunk_index": len(chunks)
+                })
+        else:
+            chunks.append({
+                "text": chunk_text,
+                "title": current_title.strip('#').strip(),
+                "section_type": "content",
+                "char_count": len(chunk_text),
+                "subsections": current_subsections.copy(),
+                "chunk_index": len(chunks)
+            })
     
     return chunks
 
