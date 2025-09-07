@@ -38,11 +38,27 @@ def wait_for_qdrant(client, retries=20, delay=2):
 
 # Inicializar clientes con configuración mejorada
 logger.info(f"Conectando a Qdrant en: {QDRANT_URL}")
-client = QdrantClient(
-    url=QDRANT_URL,
-    timeout=30,
-    prefer_grpc=False
-)
+
+# Get API key for Qdrant Cloud
+qdrant_api_key = os.getenv("QDRANT_API_KEY")
+
+if qdrant_api_key:
+    # Qdrant Cloud with API key
+    logger.info("Usando Qdrant Cloud con API key")
+    client = QdrantClient(
+        url=QDRANT_URL,
+        api_key=qdrant_api_key,
+        timeout=30,
+        prefer_grpc=False
+    )
+else:
+    # Local Qdrant without API key
+    logger.info("Usando Qdrant local sin API key")
+    client = QdrantClient(
+        url=QDRANT_URL,
+        timeout=30,
+        prefer_grpc=False
+    )
 
 # Esperar a que Qdrant esté listo
 try:
