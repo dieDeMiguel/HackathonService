@@ -25,7 +25,7 @@ def main():
             content = get_content_from_file(filepath)
             
             # Aplicar chunking híbrido
-            file_chunks = hybrid_chunking(content)
+            file_chunks = hybrid_chunking(content, "system_knowledge")
             
             # Agregar metadata del archivo fuente
             for chunk in file_chunks:

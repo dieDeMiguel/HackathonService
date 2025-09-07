@@ -202,7 +202,7 @@ def populate_collection():
             if filepath.exists():
                 logger.info(f"Processing: {filepath.name}")
                 content = get_content_from_file(filepath)
-                file_chunks = hybrid_chunking(content)
+                file_chunks = hybrid_chunking(content, "system_knowledge")
                 
                 for chunk in file_chunks:
                     chunk["source_file"] = filepath.name
