@@ -14,13 +14,34 @@ openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 COLLECTION_NAME = "HACKATHON_COLLECTION"
 
-client = QdrantClient(url="http://localhost:6333/")
-client.recreate_collection(
-    collection_name=COLLECTION_NAME,
-    vectors_config=qdrant_client.models.VectorParams(
-        size=1536, distance=qdrant_client.models.Distance.COSINE  # OpenAI text-embedding-3-small
-    ),
-)
+# Use environment variables for Qdrant configuration
+QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
+qdrant_api_key = os.getenv("QDRANT_API_KEY")
+
+# Initialize Qdrant client with proper configuration
+if qdrant_api_key:
+    # Qdrant Cloud with API key
+    client = QdrantClient(
+        url=QDRANT_URL,
+        api_key=qdrant_api_key,
+        timeout=30,
+        prefer_grpc=False
+    )
+else:
+    # Local Qdrant without API key
+    client = QdrantClient(
+        url=QDRANT_URL,
+        timeout=30,
+        prefer_grpc=False
+    )
+
+# Don't recreate collection here - let the API endpoint handle it
+# client.recreate_collection(
+#     collection_name=COLLECTION_NAME,
+#     vectors_config=qdrant_client.models.VectorParams(
+#         size=1536, distance=qdrant_client.models.Distance.COSINE  # OpenAI text-embedding-3-small
+#     ),
+# )
 
 
 def get_lines_from_file(filepath):
