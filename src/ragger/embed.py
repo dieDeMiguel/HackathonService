@@ -75,8 +75,29 @@ def hybrid_chunking(content):
                 # Si el chunk es muy largo, dividirlo inteligentemente
                 if len(chunk_text) > MAX_CHUNK_SIZE:
                     # Buscar puntos de división naturales para información de grupos
-                    if "GROUP" in chunk_text and "**GROUP" in chunk_text:
-                        # Dividir por grupos individuales
+                    if "DETAILED GROUP STAGE FIXTURE" in chunk_text and "**GROUP" in chunk_text:
+                        # Dividir por grupos individuales para fixtures detallados
+                        group_sections = chunk_text.split("**GROUP ")
+                        base_header = group_sections[0]
+                        
+                        for group_section in group_sections[1:]:
+                            if group_section.strip():
+                                # Extraer el nombre del grupo (A, B, C, etc.)
+                                group_lines = group_section.strip().split('\n')
+                                group_name = group_lines[0].split('(')[0].strip() if '(' in group_lines[0] else group_lines[0].split(':')[0].strip()
+                                
+                                group_chunk = f"{base_header}\n\n**GROUP {group_section.strip()}"
+                                chunks.append({
+                                    "text": group_chunk,
+                                    "title": f"Group {group_name} - Complete Fixture Schedule",
+                                    "section_type": "group_complete_fixture",
+                                    "char_count": len(group_chunk),
+                                    "subsections": [f"Group {group_name} All Matches"],
+                                    "chunk_index": len(chunks),
+                                    "group_id": group_name
+                                })
+                    elif "GROUP" in chunk_text and "**GROUP" in chunk_text:
+                        # División general por grupos
                         group_sections = chunk_text.split("**GROUP")
                         base_header = group_sections[0]
                         
@@ -158,7 +179,28 @@ def hybrid_chunking(content):
         chunk_text = f"{current_title}\n\n{current_section.strip()}"
         
         if len(chunk_text) > MAX_CHUNK_SIZE:
-            if "GROUP" in chunk_text and "**GROUP" in chunk_text:
+            if "DETAILED GROUP STAGE FIXTURE" in chunk_text and "**GROUP" in chunk_text:
+                # Dividir por grupos individuales para fixtures detallados
+                group_sections = chunk_text.split("**GROUP ")
+                base_header = group_sections[0]
+                
+                for group_section in group_sections[1:]:
+                    if group_section.strip():
+                        # Extraer el nombre del grupo (A, B, C, etc.)
+                        group_lines = group_section.strip().split('\n')
+                        group_name = group_lines[0].split('(')[0].strip() if '(' in group_lines[0] else group_lines[0].split(':')[0].strip()
+                        
+                        group_chunk = f"{base_header}\n\n**GROUP {group_section.strip()}"
+                        chunks.append({
+                            "text": group_chunk,
+                            "title": f"Group {group_name} - Complete Fixture Schedule",
+                            "section_type": "group_complete_fixture",
+                            "char_count": len(group_chunk),
+                            "subsections": [f"Group {group_name} All Matches"],
+                            "chunk_index": len(chunks),
+                            "group_id": group_name
+                        })
+            elif "GROUP" in chunk_text and "**GROUP" in chunk_text:
                 group_sections = chunk_text.split("**GROUP")
                 base_header = group_sections[0]
                 
