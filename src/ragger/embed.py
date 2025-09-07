@@ -49,7 +49,7 @@ def get_lines_from_file(filepath):
         return file.readlines()
 
 
-def hybrid_chunking(content):
+def hybrid_chunking(content, file_type="system_knowledge"):
     """
     Chunking híbrido mejorado que mantiene contexto de secciones completas
     Especialmente optimizado para información de grupos y fixtures
