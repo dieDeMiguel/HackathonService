@@ -74,8 +74,35 @@ def hybrid_chunking(content):
                 
                 # Si el chunk es muy largo, dividirlo inteligentemente
                 if len(chunk_text) > MAX_CHUNK_SIZE:
-                    # Buscar puntos de división naturales para información de grupos
-                    if "DETAILED GROUP STAGE FIXTURE" in chunk_text and "**GROUP" in chunk_text:
+                    # PRIORIDAD 1: Buscar la sección Quick Group Reference Guide
+                    if "Quick Group Reference Guide" in chunk_text and "### Group" in chunk_text:
+                        # Dividir por grupos individuales en la guía rápida
+                        group_sections = chunk_text.split("### Group ")
+                        base_header = group_sections[0]
+                        
+                        for group_section in group_sections[1:]:
+                            if group_section.strip():
+                                # Extraer información del grupo
+                                group_lines = group_section.strip().split('\n')
+                                first_line = group_lines[0].strip()
+                                
+                                # Extraer letra del grupo (A, B, C, etc.)
+                                group_name = first_line.split()[0].strip()
+                                
+                                # Crear chunk optimizado para la guía rápida
+                                group_chunk = f"## Quick Group Reference Guide\n\n### Group {group_section.strip()}"
+                                chunks.append({
+                                    "text": group_chunk,
+                                    "title": f"Group {group_name} - Quick Reference with All 6 Matches",
+                                    "section_type": "quick_group_reference",
+                                    "char_count": len(group_chunk),
+                                    "subsections": [f"Group {group_name} Complete Schedule"],
+                                    "chunk_index": len(chunks),
+                                    "group_id": group_name,
+                                    "priority": "high"  # Marca de alta prioridad
+                                })
+                    # PRIORIDAD 2: Buscar puntos de división naturales para información de grupos
+                    elif "DETAILED GROUP STAGE FIXTURE" in chunk_text and "**GROUP" in chunk_text:
                         # Dividir por grupos individuales para fixtures detallados
                         group_sections = chunk_text.split("**GROUP ")
                         base_header = group_sections[0]
@@ -105,7 +132,8 @@ def hybrid_chunking(content):
                                     "char_count": len(group_chunk),
                                     "subsections": [f"Group {group_name} All Matches"],
                                     "chunk_index": len(chunks),
-                                    "group_id": group_name
+                                    "group_id": group_name,
+                                    "priority": "medium"
                                 })
                     elif "GROUP" in chunk_text and "**GROUP" in chunk_text:
                         # División general por grupos
@@ -190,7 +218,34 @@ def hybrid_chunking(content):
         chunk_text = f"{current_title}\n\n{current_section.strip()}"
         
         if len(chunk_text) > MAX_CHUNK_SIZE:
-            if "DETAILED GROUP STAGE FIXTURE" in chunk_text and "**GROUP" in chunk_text:
+            # PRIORIDAD 1: Buscar la sección Quick Group Reference Guide
+            if "Quick Group Reference Guide" in chunk_text and "### Group" in chunk_text:
+                # Dividir por grupos individuales en la guía rápida
+                group_sections = chunk_text.split("### Group ")
+                base_header = group_sections[0]
+                
+                for group_section in group_sections[1:]:
+                    if group_section.strip():
+                        # Extraer información del grupo
+                        group_lines = group_section.strip().split('\n')
+                        first_line = group_lines[0].strip()
+                        
+                        # Extraer letra del grupo (A, B, C, etc.)
+                        group_name = first_line.split()[0].strip()
+                        
+                        # Crear chunk optimizado para la guía rápida
+                        group_chunk = f"## Quick Group Reference Guide\n\n### Group {group_section.strip()}"
+                        chunks.append({
+                            "text": group_chunk,
+                            "title": f"Group {group_name} - Quick Reference with All 6 Matches",
+                            "section_type": "quick_group_reference",
+                            "char_count": len(group_chunk),
+                            "subsections": [f"Group {group_name} Complete Schedule"],
+                            "chunk_index": len(chunks),
+                            "group_id": group_name,
+                            "priority": "high"
+                        })
+            elif "DETAILED GROUP STAGE FIXTURE" in chunk_text and "**GROUP" in chunk_text:
                 # Dividir por grupos individuales para fixtures detallados
                 group_sections = chunk_text.split("**GROUP ")
                 base_header = group_sections[0]
@@ -220,7 +275,8 @@ def hybrid_chunking(content):
                             "char_count": len(group_chunk),
                             "subsections": [f"Group {group_name} All Matches"],
                             "chunk_index": len(chunks),
-                            "group_id": group_name
+                            "group_id": group_name,
+                            "priority": "medium"
                         })
             elif "GROUP" in chunk_text and "**GROUP" in chunk_text:
                 group_sections = chunk_text.split("**GROUP")
@@ -255,6 +311,42 @@ def hybrid_chunking(content):
                 "subsections": current_subsections.copy(),
                 "chunk_index": len(chunks)
             })
+    
+    # Agregar metadatos de archivo y optimizaciones semánticas
+    for chunk in chunks:
+        chunk["source_file"] = "system_prompt_data.md" if "system" in file_type else "test_data.md"
+        chunk["file_type"] = file_type
+        
+        # Agregar metadatos semánticos para mejor búsqueda
+        text_lower = chunk["text"].lower()
+        
+        # Identificar si es información de grupos
+        if chunk.get("section_type") in ["quick_group_reference", "group_complete_fixture"]:
+            # Agregar keywords específicos para búsqueda
+            chunk["keywords"] = [
+                f"grupo {chunk.get('group_id', '').lower()}",
+                f"group {chunk.get('group_id', '').lower()}",
+                "partidos", "matches", "fixtures", "calendario", "schedule",
+                "donde juega", "where plays", "cities", "ciudades"
+            ]
+            
+            # Agregar información de ciudades mencionadas
+            cities_mentioned = []
+            city_keywords = [
+                "boston", "new york", "philadelphia", "atlanta", "miami", "toronto",
+                "dallas", "houston", "kansas city", "monterrey", "guadalajara", 
+                "mexico city", "los angeles", "san francisco", "seattle", "vancouver"
+            ]
+            
+            for city in city_keywords:
+                if city in text_lower:
+                    cities_mentioned.append(city)
+            
+            chunk["cities_mentioned"] = cities_mentioned
+            
+            # Boost para chunks de Quick Group Reference Guide
+            if chunk.get("section_type") == "quick_group_reference":
+                chunk["search_boost"] = 2.0  # Mayor relevancia en búsquedas
     
     return chunks
 
