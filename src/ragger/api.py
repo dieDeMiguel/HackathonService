@@ -19,7 +19,8 @@ app = FastAPI(title="RAG Search API", version="1.0.0")
 
 # Configuración
 COLLECTION_NAME = "HACKATHON_COLLECTION"
-QDRANT_URL = "http://localhost:6333"
+# Use Railway internal URL if available, fallback to localhost for local development
+QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
 
 # Inicializar clientes
 client = QdrantClient(url=QDRANT_URL)
