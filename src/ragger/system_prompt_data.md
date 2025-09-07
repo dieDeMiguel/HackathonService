@@ -220,8 +220,40 @@ Climate considerations by region:
 
 ### Current Qualification Status
 **TEAMS ALREADY QUALIFIED (as of early 2025):**
-- **Host Nations (3):** Canada, Mexico, USA
-- **Additional Qualified Teams:** Check current web sources for most up-to-date list
+
+**HOST NATIONS (3):**
+- Canada (B1 - fixed position)
+- Mexico (A1 - fixed position) 
+- United States (D1 - fixed position)
+
+**CONMEBOL - SOUTH AMERICA (6/6.5 spots):**
+- Argentina (defending champions)
+- Brazil
+- Ecuador
+- Uruguay
+- Colombia
+- Paraguay
+
+**AFC - ASIA (6/8.5 spots):**
+- Japan
+- Iran
+- South Korea
+- Uzbekistan (debut)
+- Jordan (debut)
+- Australia
+
+**OFC - OCEANIA (1/1.5 spots):**
+- New Zealand
+
+**TOTAL QUALIFIED: 16 teams out of 48**
+
+**REMAINING QUALIFICATION:**
+- **CAF (Africa):** 9.5 spots - qualification ongoing
+- **CONCACAF:** 3.5 additional spots (3 hosts already qualified)
+- **UEFA (Europe):** 16 spots - qualification ongoing
+- **AFC:** 2.5 additional spots remaining
+- **CONMEBOL:** 0.5 playoff spot remaining
+- **OFC:** 0.5 playoff spot remaining
 
 **SUSPENDED/WITHDRAWN TEAMS:**
 - **Russia:** Suspended indefinitely due to invasion of Ukraine (February 28, 2022)
