@@ -5,6 +5,7 @@ import qdrant_client
 from qdrant_client import QdrantClient
 import logging
 import os
+import time
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -22,8 +23,35 @@ COLLECTION_NAME = "HACKATHON_COLLECTION"
 # Use Railway internal URL if available, fallback to localhost for local development
 QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
 
-# Inicializar clientes
-client = QdrantClient(url=QDRANT_URL)
+# Función para esperar a que Qdrant esté listo
+def wait_for_qdrant(client, retries=20, delay=2):
+    for i in range(retries):
+        try:
+            collections = client.get_collections()
+            logger.info(f"✅ Qdrant conectado exitosamente en intento {i+1}")
+            return collections
+        except Exception as e:
+            logger.warning(f"[{i+1}/{retries}] Qdrant no listo: {e}")
+            if i < retries - 1:  # No sleep en el último intento
+                time.sleep(delay)
+    raise RuntimeError("Qdrant no respondió después de todos los intentos")
+
+# Inicializar clientes con configuración mejorada
+logger.info(f"Conectando a Qdrant en: {QDRANT_URL}")
+client = QdrantClient(
+    url=QDRANT_URL,
+    timeout=30,
+    prefer_grpc=False
+)
+
+# Esperar a que Qdrant esté listo
+try:
+    wait_for_qdrant(client)
+    logger.info("🎉 Conexión con Qdrant establecida")
+except Exception as e:
+    logger.error(f"❌ Error conectando con Qdrant: {e}")
+    # No fallar el startup, pero loggear el error
+
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 class SearchRequest(BaseModel):
