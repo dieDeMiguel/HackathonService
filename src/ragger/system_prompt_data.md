@@ -437,6 +437,47 @@ Teams that would most likely be the top seeds if the draw were held today:
 
 **Note:** The top ~9 teams on this list will be assigned to Groups C, E, F, G, H, I, J, K, L as top seeds. They will not be drawn into Groups A, B, or D.
 
+## Argentina Probability Analysis
+
+### Where Argentina is Most Likely to Play
+
+**CRITICAL:** Argentina CANNOT be drawn into Groups A, B, or D (reserved for host nations: Mexico, Canada, USA).
+
+**Argentina's Possible Groups:** C, E, F, G, H, I, J, K, L (9 groups total)
+
+### Statistical Analysis by City (Based on Group Distribution)
+
+**Cities with HIGHEST probability for Argentina:**
+1. **New York (MetLife Stadium):** 3 groups possible (C, E, I) = 33.3% chance
+2. **Philadelphia (Lincoln Financial Field):** 3 groups possible (C, E, L) = 33.3% chance  
+3. **Dallas (AT&T Stadium):** 3 groups possible (F, J, L) = 33.3% chance
+
+**Cities with MEDIUM probability for Argentina:**
+- **Boston:** 2 groups (C, I, L) = 22.2% chance
+- **Atlanta:** 2 groups (C, K) = 22.2% chance
+- **Miami:** 2 groups (C, K) = 22.2% chance
+- **Houston:** 2 groups (E, F, K) = 22.2% chance
+- **Kansas City:** 2 groups (F, J) = 22.2% chance
+- **Toronto:** 2 groups (E, I, L) = 22.2% chance
+
+**Cities with LOWER probability for Argentina:**
+- **Guadalajara:** 1 group (H) = 11.1% chance
+- **Seattle:** 1 group (G) = 11.1% chance
+- **Los Angeles:** 1 group (G) = 11.1% chance
+- **Vancouver:** 1 group (G) = 11.1% chance
+- **San Francisco:** 1 group (J) = 11.1% chance
+
+### Most Matches Per City (Correct Information)
+
+**CORRECT RANKING:**
+1. **Dallas:** 9 matches total (most of any host city)
+2. **New York:** 8 matches
+3. **Atlanta:** 8 matches  
+4. **Los Angeles:** 8 matches
+5. **Miami:** 7 matches (includes 3rd place match)
+
+**IMPORTANT:** Mexico City (Estadio Azteca) does NOT have the most matches. Dallas has the most with 9 matches.
+
 ## Ticket Information
 
 ### Official Ticket Program Launch
