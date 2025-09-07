@@ -634,22 +634,89 @@ To manage the vast distances of the tournament, the group stage schedule is orga
 • **Player Release Date:** May 25, 2026 (final club matchday: May 24)
 • **Draw:** December 2025 (venue TBD - Las Vegas, Washington D.C. bidding)
 
-🏟️ VENUE ASSIGNMENT AND REGIONAL PODS BY GROUP
+🏟️ VENUE ASSIGNMENT AND REGIONAL ZONES
 ─────────────────────────────────────────────────────────────────────
-Each group will play all 6 of their matches exclusively within their assigned regional "pod."
+**REGIONAL ZONE SYSTEM:**
+To avoid very long travels, venues are grouped into three zones:
 
-• **Group A (Mexico - West):** Guadalajara and Mexico City
-• **Group B (Canada - West/East):** Toronto and Vancouver
-• **Group C (USA - Northeast):** Boston and Philadelphia
-• **Group D (USA - West Coast):** Los Angeles and Seattle
-• **Group E (USA - Northeast):** Boston and New York/New Jersey
-• **Group F (Mexico - West):** Guadalajara and Monterrey
-• **Group G (Mexico - Central):** Mexico City and Monterrey
-• **Group H (USA - Central):** Dallas and Kansas City
-• **Group I (USA - Central):** Dallas and Kansas City
-• **Group J (USA - California):** Los Angeles and San Francisco Bay Area
-• **Group K (USA - West/South):** Seattle and Houston
-• **Group L (USA - Southeast):** Atlanta and Miami
+• **WEST ZONE:** Vancouver, Seattle, San Francisco, Los Angeles
+• **CENTER ZONE:** Mexico City, Guadalajara, Monterrey, Dallas, Kansas City, Houston  
+• **EAST ZONE:** New York, Boston, Toronto, Philadelphia, Miami, Atlanta
+
+👉 **CRITICAL:** In group stage there are NO coast-to-coast travels (only East–Center or West–Center connections).
+
+**CITIES WITH MOST MATCHES:**
+• **Dallas:** 9 matches (most of any host city)
+• **New York, Atlanta, Los Angeles:** 8 matches each
+• **Miami:** 7 matches (includes 3rd place match)
+
+**DETAILED GROUP STAGE FIXTURE BY GROUP:**
+
+🔹 **HOST GROUPS**
+
+**GROUP A (MEXICO):**
+• June 11: Guadalajara (A vs A) / Mexico City (Mexico vs A2)
+• June 18: Guadalajara (Mexico vs A4) / Miami (A vs A)  
+• June 24: Mexico City (Mexico vs A3) / Monterrey (A vs A)
+
+**GROUP B (CANADA):**
+• June 12: Toronto (Canada vs B2)
+• June 13: Group B match (without Canada)
+• June 18: Vancouver (Canada vs B3) / Los Angeles (B vs B)
+• June 24: Vancouver (Canada vs B4) / Seattle (B vs B)
+
+**GROUP D (USA):**
+• June 12: Los Angeles (USA vs D2)
+• June 13: Vancouver (D match without USA)
+• June 19: Seattle (USA vs D3) / San Francisco (D vs D)
+• June 25: Los Angeles (USA vs D4) / San Francisco (D vs D)
+
+🔹 **NON-HOST GROUPS**
+
+**GROUP C:**
+• June 13: Boston / New York
+• June 19: Boston / Philadelphia  
+• June 24: Atlanta / Miami
+
+**GROUP E:**
+• June 14: Philadelphia / Houston
+• June 20: Kansas City / Toronto
+• June 25: Philadelphia / New York
+
+**GROUP F:**
+• June 14: Dallas / Monterrey
+• June 20: Houston / Monterrey
+• June 25: Dallas / Kansas City
+
+**GROUP G:**
+• June 15: Seattle / Los Angeles
+• June 21: Vancouver / Los Angeles
+• June 26: Vancouver / Seattle
+
+**GROUP H:**
+• June 15: Atlanta / Miami
+• June 21: Atlanta / Miami
+• June 26: Guadalajara / Houston
+
+**GROUP I:**
+• June 16: Boston / New York
+• June 22: Philadelphia / New York
+• June 26: Toronto / Boston
+
+**GROUP J:**
+• June 16: San Francisco / Kansas City
+• June 22: San Francisco / Dallas
+• June 27: Kansas City / Dallas
+
+**GROUP K:**
+• June 17: Mexico City / Houston
+• June 23: Guadalajara / Houston
+• June 27: Atlanta / Miami
+
+**GROUP L:**
+• June 17: Dallas / Toronto
+• June 23: Boston / Toronto
+• June 27: Philadelphia / New York
 
 **CRITICAL NOTE: Do not use any other match list or schedule other than the provided NECESSARY_DATA.**
 
